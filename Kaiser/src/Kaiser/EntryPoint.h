@@ -7,13 +7,21 @@ extern Kaiser::Application* Kaiser::CreateApplication();
 
 int main(int argc, char** argv)
 {
-	Kaiser::Trace::Init();
-	KS_CORE_WARN("Initialized Log!");
-	KS_INFO("Initialized Log!");
-	
-	auto app = Kaiser::CreateApplication();
-	app->Run();
-	delete app;
+	__try
+	{
+		Kaiser::Trace::Init();
+		Kaiser::CrashDump::Init();
+
+
+		auto app = Kaiser::CreateApplication();
+		app->Run();
+		delete app;
+	}
+	__except (Kaiser::CrashDump::WriteDump(GetExceptionInformation()))
+	{
+
+
+	}
 }
 
 #endif

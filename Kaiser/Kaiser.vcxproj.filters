@@ -4,6 +4,15 @@
     <Filter Include="Kaiser">
       <UniqueIdentifier>{44BFE8BD-3061-1394-191C-27E8055D9AE4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Kaiser\Events">
+      <UniqueIdentifier>{A816AEB3-14D7-29EA-DD11-736749916EC6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Platform">
+      <UniqueIdentifier>{2AC788B4-1694-E3BF-3FAD-D1672BD9184E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Platform\Windows">
+      <UniqueIdentifier>{64FBD71A-50F4-F66C-7926-DCF1657ED678}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Kaiser.h" />
@@ -13,19 +22,67 @@
     <ClInclude Include="src\Kaiser\Core.h">
       <Filter>Kaiser</Filter>
     </ClInclude>
+    <ClInclude Include="src\Kaiser\CrashDump.h">
+      <Filter>Kaiser</Filter>
+    </ClInclude>
     <ClInclude Include="src\Kaiser\EntryPoint.h">
+      <Filter>Kaiser</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Kaiser\Events\AppEvent.h">
+      <Filter>Kaiser\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Kaiser\Events\Event.h">
+      <Filter>Kaiser\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Kaiser\Events\KeyEvent.h">
+      <Filter>Kaiser\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Kaiser\Events\MouseEvent.h">
+      <Filter>Kaiser\Events</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Kaiser\Layer.h">
+      <Filter>Kaiser</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Kaiser\LayerStack.h">
       <Filter>Kaiser</Filter>
     </ClInclude>
     <ClInclude Include="src\Kaiser\Trace.h">
       <Filter>Kaiser</Filter>
     </ClInclude>
+    <ClInclude Include="src\Kaiser\Window.h">
+      <Filter>Kaiser</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\Windows\WindowsWindow.h">
+      <Filter>Platform\Windows</Filter>
+    </ClInclude>
+    <ClInclude Include="src\stdafx.h" />
+    <ClInclude Include="src\Kaiser\ImGui\ImGuiLayer.h" />
+    <ClInclude Include="src\Platform\OpenGL\ImGuiGLRenderer.h" />
+    <ClInclude Include="src\Platform\OpenGL\imgui_impl_opengl3_loader.h" />
+    <ClInclude Include="src\Platform\OpenGL\imgui_impl_glfw.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Kaiser\Application.cpp">
       <Filter>Kaiser</Filter>
     </ClCompile>
+    <ClCompile Include="src\Kaiser\CrashDump.cpp">
+      <Filter>Kaiser</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Kaiser\Layer.cpp">
+      <Filter>Kaiser</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Kaiser\LayerStack.cpp">
+      <Filter>Kaiser</Filter>
+    </ClCompile>
     <ClCompile Include="src\Kaiser\Trace.cpp">
       <Filter>Kaiser</Filter>
     </ClCompile>
+    <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp">
+      <Filter>Platform\Windows</Filter>
+    </ClCompile>
+    <ClCompile Include="src\stdafx.cpp" />
+    <ClCompile Include="src\Kaiser\ImGui\ImGuiLayer.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\ImGuiGLRenderer.cpp" />
+    <ClCompile Include="src\Platform\OpenGL\imgui_impl_glfw.cpp" />
   </ItemGroup>
 </Project>
