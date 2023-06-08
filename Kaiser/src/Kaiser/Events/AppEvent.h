@@ -5,7 +5,7 @@
 
 namespace Kaiser {
 
-	class KAISER_API WindowResizeEvent : public Event
+	class WindowResizeEvent : public Event
 	{
 	public:
 		WindowResizeEvent(unsigned int width, unsigned int height)
@@ -29,7 +29,7 @@ namespace Kaiser {
 		unsigned int m_Width, m_Height;
 	};
 
-	class KAISER_API WindowCloseEvent : public Event
+	class WindowCloseEvent : public Event
 	{
 	public:
 		WindowCloseEvent() {}
@@ -38,7 +38,7 @@ namespace Kaiser {
 			EVENT_CLASS_CATEGORY(EventCategoryApplication)
 	};
 
-	class KAISER_API AppTickEvent : public Event
+	class AppTickEvent : public Event
 	{
 	public:
 		AppTickEvent() {}
@@ -47,7 +47,7 @@ namespace Kaiser {
 			EVENT_CLASS_CATEGORY(EventCategoryApplication)
 	};
 
-	class KAISER_API AppUpdateEvent : public Event
+	class AppUpdateEvent : public Event
 	{
 	public:
 		AppUpdateEvent() {}
@@ -56,7 +56,7 @@ namespace Kaiser {
 			EVENT_CLASS_CATEGORY(EventCategoryApplication)
 	};
 
-	class KAISER_API AppRenderEvent : public Event
+	class AppRenderEvent : public Event
 	{
 	public:
 		AppRenderEvent() {}

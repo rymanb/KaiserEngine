@@ -7,7 +7,7 @@
 
 namespace Kaiser
 {
-	class KAISER_API CrashDump
+	class CrashDump
 	{
 	public:
 		static void Init();

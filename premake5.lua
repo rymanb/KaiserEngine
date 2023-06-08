@@ -15,6 +15,7 @@ IncludeDir = {}
 IncludeDir["GLFW"] = "Kaiser/vendor/glfw/include"
 IncludeDir["Glad"] = "Kaiser/vendor/glad/include"
 IncludeDir["ImGui"] = "Kaiser/vendor/imgui"
+IncludeDir["glm"] = "Kaiser/vendor/glm"
 
 include "Kaiser/vendor/glfw"
 include "Kaiser/vendor/glad"
@@ -23,8 +24,11 @@ include "Kaiser/vendor/imgui"
 
 project "Kaiser"
 	location "Kaiser"
-	kind "SharedLib"
+	kind "StaticLib"
 	language "C++"
+	cppdialect "C++20"
+	staticruntime "On"
+
 
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
@@ -36,7 +40,14 @@ project "Kaiser"
 	files
 	{
 		"%{prj.name}/src/**.h",
-		"%{prj.name}/src/**.cpp"
+		"%{prj.name}/src/**.cpp",
+		"%{prj.name}/vendor/glm/glm/**.hpp",
+		"%{prj.name}/vendor/glm/glm/**.inl"
+	}
+
+	defines
+	{
+		"_CRT_SECURE_NO_WARNINGS"
 	}
 
 	includedirs
@@ -45,7 +56,8 @@ project "Kaiser"
 		"%{prj.name}/vendor/spdlog/include",
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.Glad}",
-		"%{IncludeDir.ImGui}"
+		"%{IncludeDir.ImGui}",
+		"%{IncludeDir.glm}"
 		
 	}
 	
@@ -58,8 +70,7 @@ project "Kaiser"
 	}
 
 	filter "system:windows"
-		cppdialect "C++20"
-		staticruntime "On"
+
 		systemversion "latest"
 
 		defines
@@ -69,30 +80,30 @@ project "Kaiser"
 			"GLFW_INCLUDE_NONE"
 		}
 
-		postbuildcommands
-		{
-			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
-		}
-
 	filter "configurations:Debug"
 		defines "KS_DEBUG"
-		buildoptions "/MDd"
+		--buildoptions "/MDd"
+		runtime "Debug"
 		symbols "On"
 
 	filter "configurations:Release"
 		defines "KS_RELEASE"
-		buildoptions "/MD"
+		--buildoptions "/MD"
+		runtime "Release"
 		optimize "On"
 
 	filter "configurations:Dist"
 		defines "KS_DIST"
-		buildoptions "/MD"
+		--buildoptions "/MD"
+		runtime "Release"
 		optimize "On"
 
 project "Sandbox"
 	location "Sandbox"
 	kind "ConsoleApp"
 	language "C++"
+	cppdialect "C++20"
+	staticruntime "on"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
 	objdir ("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -106,7 +117,9 @@ project "Sandbox"
 	includedirs
 	{
 		"Kaiser/vendor/spdlog/include",
-		"Kaiser/src"
+		"Kaiser/src",
+		"%{IncludeDir.glm}",
+		"%{IncludeDir.ImGui}"
 	}
 
 	links
@@ -115,8 +128,6 @@ project "Sandbox"
 	}
 
 	filter "system:windows"
-		cppdialect "C++20"
-		staticruntime "on"
 		systemversion "latest"
 
 		defines
@@ -126,18 +137,19 @@ project "Sandbox"
 
 	filter "configurations:Debug"
 		runtime "Debug"
-		buildoptions "/MDd"
+		--buildoptions "/MDd"
 		defines "KS_DEBUG"
 		symbols "On"
 
 	filter "configurations:Release"
 		runtime "Release"
-		buildoptions "/MD"
+		--buildoptions "/MD"
 		defines "KS_RELEASE"
 		optimize "On"
 
 	filter "configurations:Dist"
 		runtime "Release"
-		buildoptions "/MD"
+		--buildoptions "/MD"
 		defines "KS_DIST"
 		optimize "On"
+		

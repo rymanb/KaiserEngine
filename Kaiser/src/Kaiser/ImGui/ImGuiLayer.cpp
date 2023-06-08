@@ -1,17 +1,18 @@
 #include "stdafx.h"
 #include "ImGuiLayer.h"
-#include <glfw/glfw3.h>
-#include <glad/glad.h>
 
-#include <misc/cpp/imgui_stdlib.cpp>
+#include <imgui.h>
+#include <imgui_internal.h>
 
-#define IMGUI_IMPL_OPENGL_LOADER_GLAD
-
-#include "Platform/OpenGL/ImGuiGLRenderer.h"
+#include <backends/imgui_impl_glfw.h>
+#include <backends/imgui_impl_opengl3.h>
 
 #include "Kaiser/Application.h"
 
-#include "Platform/OpenGL/imgui_impl_glfw.h"
+// TEMPORARY
+#include <GLFW/glfw3.h>
+#include <glad/glad.h>
+
 
 
 Kaiser::ImGuiLayer::ImGuiLayer() : Layer("ImGuiLayer")
@@ -75,27 +76,15 @@ void Kaiser::ImGuiLayer::OnDetach()
 	ImGui::DestroyContext();
 }
 
-void Kaiser::ImGuiLayer::OnUpdate()
+void Kaiser::ImGuiLayer::OnImGuiRender()
 {
-
-	Begin();
-
 	static bool show = true;
 	ImGui::ShowDemoWindow(&show);
-	
-	End();
-
 }
 
-void Kaiser::ImGuiLayer::OnEvent(Event& e)
-{
-	if (m_BlockEvents)
-	{
-		ImGuiIO& io = ImGui::GetIO();
-		e.Handled |= e.IsInCategory(EventCategoryMouse) & io.WantCaptureMouse;
-		e.Handled |= e.IsInCategory(EventCategoryKeyboard) & io.WantCaptureKeyboard;
-	}
-}
+
+
+
 
 void Kaiser::ImGuiLayer::Begin()
 {

@@ -1,10 +1,10 @@
 
 #include "stdafx.h"
-#include "CrashDump.h"
-#ifdef _DEBUG
+#include "Kaiser/CrashDump.h"
+//#ifdef _DEBUG
 #include <DbgHelp.h>
 
-#include "Trace.h"
+#include "Kaiser/Trace.h"
 
 
 #pragma comment ( lib, "dbghelp.lib" )
@@ -24,7 +24,7 @@ namespace Kaiser
 
 
 
-	inline LONG WINAPI CrashDump::WriteDump(EXCEPTION_POINTERS* pException)
+	LONG WINAPI CrashDump::WriteDump(EXCEPTION_POINTERS* pException)
 	{
 		KS_CORE_FATAL("Crash Detected: Dumping log");
 		CrashDump::WriteToFile(pException);
@@ -47,7 +47,7 @@ namespace Kaiser
 
 		MiniDumpWriteDump(GetCurrentProcess(), GetCurrentProcessId(), hFile, type, &mdei, NULL, NULL);
 	}
-#endif
+	//#endif
 
 }
 

@@ -1,12 +1,14 @@
 #pragma once
 
-#pragma comment (lib, "dwmapi.lib")
+
+
 
 #include <iostream>
 #include <memory.h>
 #include <utility>
 #include <algorithm>
 #include <functional>
+
 
 #include <string>
 #include <sstream>
@@ -16,4 +18,5 @@
 
 #ifdef KS_PLATFORM_WINDOWS
 	#include <windows.h>
+	#include <glm/glm.hpp>
 #endif

@@ -1,5 +1,8 @@
 #include <Kaiser.h>
 
+#include "imgui.h"
+
+
 class ExampleLayer : public Kaiser::Layer
 {
 public:
@@ -10,12 +13,22 @@ public:
 
 	void OnUpdate() override
 	{
-		KS_INFO("ExampleLayer::Update");
+		//KS_INFO("ExampleLayer::Update");
+
 	}
 
 	void OnEvent(Kaiser::Event& event) override
 	{
-		KS_TRACE("{0}", event);
+		if (event.GetEventType() == Kaiser::EventType::KeyPressed)
+		{
+			Kaiser::KeyPressedEvent& e = (Kaiser::KeyPressedEvent&)event;
+			//KS_TRACE("{0}", (char)e.GetKey());
+		}
+	}
+
+	void OnImGuiRender() override
+	{
+
 	}
 };
 
@@ -24,14 +37,14 @@ class Sandbox : public Kaiser::Application
 public:
 	Sandbox()
 	{
-		PushLayer(new ExampleLayer());
-		PushOverlay(new Kaiser::ImGuiLayer());
+		PushLayer(knew ExampleLayer());
 	}
 
 	~Sandbox()
 	{
 
 	}
+
 
 	
 };

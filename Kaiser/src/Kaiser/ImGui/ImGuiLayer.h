@@ -5,7 +5,7 @@
 
 namespace Kaiser
 {
-	class KAISER_API ImGuiLayer : public Layer
+	class ImGuiLayer : public Layer
 	{
 	public:
 		ImGuiLayer();
@@ -13,8 +13,9 @@ namespace Kaiser
 
 		virtual void OnAttach() override;
 		virtual void OnDetach() override;
-		virtual void OnUpdate() override;
-		virtual void OnEvent(Event& event) override;
+		virtual void OnImGuiRender() override;
+
+		
 		
 		void Begin();
 		void End();

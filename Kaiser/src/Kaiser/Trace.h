@@ -13,7 +13,7 @@ namespace Kaiser
 
 	typedef std::shared_ptr<spdlog::logger> Logger;
 	
-	class KAISER_API Trace
+	class Trace
 	{
 	public:
 		static void Init();

@@ -7,3 +7,6 @@
 [submodule "Kaiser/vendor/imgui"]
 	path = Kaiser/vendor/imgui
 	url = https://github.com/TheCherno/imgui
+[submodule "Kaiser/vendor/glm"]
+	path = Kaiser/vendor/glm
+	url = https://github.com/g-truc/glm

@@ -6,9 +6,13 @@
 #include "Events/AppEvent.h"
 #include "Kaiser/LayerStack.h"
 
+#include "Kaiser/ImGui/ImGuiLayer.h"
+
+#include "Kaiser/Renderer/Shader.h"
+
 namespace Kaiser
 {
-	class KAISER_API Application
+	class Application
 	{
 	public:
 		Application();
@@ -30,9 +34,13 @@ namespace Kaiser
 		
 		
 		std::unique_ptr<Window> window;
+		ImGuiLayer* guiLayer;
 		bool running = true;
 		
 		LayerStack layers;
+
+		unsigned int vertexArray, vertexBuffer, indexBuffer;
+		std::unique_ptr<Shader> shader;
 		
 	private:
 		static Application* instance;

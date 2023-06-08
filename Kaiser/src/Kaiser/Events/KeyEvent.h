@@ -1,14 +1,16 @@
 #pragma once
 
 #include "Event.h"
+#include "Kaiser/Keycode.h"
 
 
 namespace Kaiser {
 
-	class KAISER_API KeyEvent : public Event
+	class KeyEvent : public Event
 	{
 	public:
 		inline int GetKeyCode() const { return m_KeyCode; }
+		inline Key GetKey() const { return KeyCode::Get(m_KeyCode); }
 
 		EVENT_CLASS_CATEGORY(EventCategoryKeyboard | EventCategoryInput)
 	protected:
@@ -18,7 +20,7 @@ namespace Kaiser {
 		int m_KeyCode;
 	};
 
-	class KAISER_API KeyPressedEvent : public KeyEvent
+	class KeyPressedEvent : public KeyEvent
 	{
 	public:
 		KeyPressedEvent(int keycode, int repeatCount)
@@ -38,7 +40,7 @@ namespace Kaiser {
 		int m_RepeatCount;
 	};
 
-	class KAISER_API KeyReleasedEvent : public KeyEvent
+	class KeyReleasedEvent : public KeyEvent
 	{
 	public:
 		KeyReleasedEvent(int keycode)

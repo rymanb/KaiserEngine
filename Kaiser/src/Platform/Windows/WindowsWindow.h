@@ -5,6 +5,8 @@
 
 #include <GLFW/glfw3.h>
 
+#include "Kaiser/Renderer/GraphicsContext.h"
+
 namespace Kaiser {
 
 	class WindowsWindow : public Window
@@ -29,6 +31,7 @@ namespace Kaiser {
 		virtual void Shutdown();
 	private:
 		GLFWwindow* m_Window;
+		GraphicsContext* m_Context;
 
 		struct WindowData
 		{
