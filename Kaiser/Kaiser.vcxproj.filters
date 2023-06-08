@@ -13,8 +13,17 @@
     <Filter Include="src\Kaiser\ImGui">
       <UniqueIdentifier>{E53DDD37-D136-FC89-FA68-E10EE6C0DB95}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Kaiser\Memory">
+      <UniqueIdentifier>{83975D3C-EFAD-5BD2-3825-E7F3A47A2C5A}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Kaiser\Renderer">
+      <UniqueIdentifier>{8196F168-EDF7-CE76-7665-1529E2C50536}</UniqueIdentifier>
+    </Filter>
     <Filter Include="src\Platform">
       <UniqueIdentifier>{21CA02E5-0D2D-9289-B6B2-CA3FA2F45D0C}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Platform\OpenGL">
+      <UniqueIdentifier>{35A49437-A105-7245-2A73-B8F796D3A804}</UniqueIdentifier>
     </Filter>
     <Filter Include="src\Platform\Windows">
       <UniqueIdentifier>{5B054582-4794-CE4B-F0B2-E246DC20DFF1}</UniqueIdentifier>
@@ -84,11 +93,29 @@
     <ClInclude Include="src\Kaiser\LayerStack.h">
       <Filter>src\Kaiser</Filter>
     </ClInclude>
+    <ClInclude Include="src\Kaiser\Memory\Mallocator.h">
+      <Filter>src\Kaiser\Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Kaiser\Memory\MemoryInfo.h">
+      <Filter>src\Kaiser\Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Kaiser\Memory\MemoryManager.h">
+      <Filter>src\Kaiser\Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Kaiser\Renderer\GraphicsContext.h">
+      <Filter>src\Kaiser\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Kaiser\Renderer\Shader.h">
+      <Filter>src\Kaiser\Renderer</Filter>
+    </ClInclude>
     <ClInclude Include="src\Kaiser\Trace.h">
       <Filter>src\Kaiser</Filter>
     </ClInclude>
     <ClInclude Include="src\Kaiser\Window.h">
       <Filter>src\Kaiser</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h">
+      <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\Windows\WinInput.h">
       <Filter>src\Platform\Windows</Filter>
@@ -1347,12 +1374,6 @@
     <ClInclude Include="vendor\glm\glm\vector_relational.hpp">
       <Filter>vendor\glm\glm</Filter>
     </ClInclude>
-    <ClInclude Include="src\Kaiser\Renderer\GraphicsContext.h" />
-    <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h" />
-    <ClInclude Include="src\Kaiser\Renderer\Shader.h" />
-    <ClInclude Include="src\Kaiser\Memory\MemoryManager.h" />
-    <ClInclude Include="src\Kaiser\Memory\Mallocator.h" />
-    <ClInclude Include="src\Kaiser\Memory\MemoryInfo.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Kaiser\Application.cpp">
@@ -1370,8 +1391,17 @@
     <ClCompile Include="src\Kaiser\LayerStack.cpp">
       <Filter>src\Kaiser</Filter>
     </ClCompile>
+    <ClCompile Include="src\Kaiser\Memory\MemoryManager.cpp">
+      <Filter>src\Kaiser\Memory</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Kaiser\Renderer\Shader.cpp">
+      <Filter>src\Kaiser\Renderer</Filter>
+    </ClCompile>
     <ClCompile Include="src\Kaiser\Trace.cpp">
       <Filter>src\Kaiser</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp">
+      <Filter>src\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\Windows\WinCrashDump.cpp">
       <Filter>src\Platform\Windows</Filter>
@@ -1385,8 +1415,5 @@
     <ClCompile Include="src\stdafx.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp" />
-    <ClCompile Include="src\Kaiser\Renderer\Shader.cpp" />
-    <ClCompile Include="src\Kaiser\Memory\MemoryManager.cpp" />
   </ItemGroup>
 </Project>

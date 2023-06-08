@@ -143,10 +143,6 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\Kaiser\Memory\Mallocator.h" />
-    <ClInclude Include="src\Kaiser\Memory\MemoryInfo.h" />
-    <ClInclude Include="src\Kaiser\Memory\MemoryManager.h" />
-    <ClInclude Include="src\Kaiser\Renderer\Shader.h" />
     <ClInclude Include="src\Kaiser.h" />
     <ClInclude Include="src\Kaiser\Application.h" />
     <ClInclude Include="src\Kaiser\Core.h" />
@@ -161,7 +157,11 @@
     <ClInclude Include="src\Kaiser\Keycode.h" />
     <ClInclude Include="src\Kaiser\Layer.h" />
     <ClInclude Include="src\Kaiser\LayerStack.h" />
+    <ClInclude Include="src\Kaiser\Memory\Mallocator.h" />
+    <ClInclude Include="src\Kaiser\Memory\MemoryInfo.h" />
+    <ClInclude Include="src\Kaiser\Memory\MemoryManager.h" />
     <ClInclude Include="src\Kaiser\Renderer\GraphicsContext.h" />
+    <ClInclude Include="src\Kaiser\Renderer\Shader.h" />
     <ClInclude Include="src\Kaiser\Trace.h" />
     <ClInclude Include="src\Kaiser\Window.h" />
     <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h" />
@@ -586,13 +586,13 @@
     <ClInclude Include="vendor\glm\glm\vector_relational.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Kaiser\Memory\MemoryManager.cpp" />
-    <ClCompile Include="src\Kaiser\Renderer\Shader.cpp" />
     <ClCompile Include="src\Kaiser\Application.cpp" />
     <ClCompile Include="src\Kaiser\ImGui\ImGuiBuild.cpp" />
     <ClCompile Include="src\Kaiser\ImGui\ImGuiLayer.cpp" />
     <ClCompile Include="src\Kaiser\Layer.cpp" />
     <ClCompile Include="src\Kaiser\LayerStack.cpp" />
+    <ClCompile Include="src\Kaiser\Memory\MemoryManager.cpp" />
+    <ClCompile Include="src\Kaiser\Renderer\Shader.cpp" />
     <ClCompile Include="src\Kaiser\Trace.cpp" />
     <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp" />
     <ClCompile Include="src\Platform\Windows\WinCrashDump.cpp" />
