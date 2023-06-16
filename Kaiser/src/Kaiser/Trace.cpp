@@ -5,19 +5,19 @@
 
 namespace Kaiser
 {
-	Logger Trace::s_CoreLogger;
-	Logger Trace::s_ClientLogger;
+	Logger Trace::sCoreLogger;
+	Logger Trace::sClientLogger;
 }
 
 void Kaiser::Trace::Init()
 {
 	spdlog::set_pattern("%^[%T] %n: %v%$");
 
-	s_CoreLogger = spdlog::stdout_color_mt("Engine");
-	s_CoreLogger->set_level(spdlog::level::trace);
+	sCoreLogger = spdlog::stdout_color_mt("Engine");
+	sCoreLogger->set_level(spdlog::level::trace);
 	
-	s_ClientLogger = spdlog::stdout_color_mt("APP");
-	s_ClientLogger->set_level(spdlog::level::trace);
+	sClientLogger = spdlog::stdout_color_mt("APP");
+	sClientLogger->set_level(spdlog::level::trace);
 
 	KS_CORE_INFO("TraceLog: Initialized Successfully.");
 	

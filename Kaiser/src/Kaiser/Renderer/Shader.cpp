@@ -83,29 +83,29 @@ Kaiser::Shader::Shader(const std::string& vertexSource, const std::string& fragm
 	// Vertex and fragment shaders are successfully compiled.
 	// Now time to link them together into a program.
 	// Get a program object.
-	shaderID = glCreateProgram();
+	mID = glCreateProgram();
 
 	// Attach our shaders to our program
-	glAttachShader(shaderID, vertexShader);
-	glAttachShader(shaderID, fragmentShader);
+	glAttachShader(mID, vertexShader);
+	glAttachShader(mID, fragmentShader);
 
 	// Link our program
-	glLinkProgram(shaderID);
+	glLinkProgram(mID);
 
 	// Note the different functions here: glGetProgram* instead of glGetShader*.
 	GLint isLinked = 0;
-	glGetProgramiv(shaderID, GL_LINK_STATUS, (int*)&isLinked);
+	glGetProgramiv(mID, GL_LINK_STATUS, (int*)&isLinked);
 	if (isLinked == GL_FALSE)
 	{
 		GLint maxLength = 0;
-		glGetProgramiv(shaderID, GL_INFO_LOG_LENGTH, &maxLength);
+		glGetProgramiv(mID, GL_INFO_LOG_LENGTH, &maxLength);
 
 		// The maxLength includes the NULL character
 		std::vector<GLchar> infoLog(maxLength);
-		glGetProgramInfoLog(shaderID, maxLength, &maxLength, &infoLog[0]);
+		glGetProgramInfoLog(mID, maxLength, &maxLength, &infoLog[0]);
 
 		// We don't need the program anymore.
-		glDeleteProgram(shaderID);
+		glDeleteProgram(mID);
 		// Don't leak shaders either.
 		glDeleteShader(vertexShader);
 		glDeleteShader(fragmentShader);
@@ -119,21 +119,26 @@ Kaiser::Shader::Shader(const std::string& vertexSource, const std::string& fragm
 	}
 
 	// Always detach shaders after a successful link.
-	glDetachShader(shaderID, vertexShader);
-	glDetachShader(shaderID, fragmentShader);
+	glDetachShader(mID, vertexShader);
+	glDetachShader(mID, fragmentShader);
 }
 
 Kaiser::Shader::~Shader()
 {
-	glDeleteProgram(shaderID);
+	glDeleteProgram(mID);
 }
 
 void Kaiser::Shader::Bind() const
 {
-	glUseProgram(shaderID);
+	glUseProgram(mID);
 }
 
 void Kaiser::Shader::Unbind() const
 {
 	glUseProgram(0);
+}
+
+void Kaiser::Shader::UploadUniformMat4(const std::string& name, const glm::mat4& matrix)
+{
+	glUniformMatrix4fv(glGetUniformLocation(mID, name.c_str()), 1, GL_FALSE, &matrix[0][0]);
 }

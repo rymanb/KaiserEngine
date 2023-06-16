@@ -10,6 +10,11 @@
 
 #include "Kaiser/Renderer/Shader.h"
 
+#include "Kaiser/Renderer/Buffer.h"
+#include "Kaiser/Renderer/VertexArray.h"
+
+#include "Engine.h"
+
 namespace Kaiser
 {
 	class Application
@@ -25,25 +30,23 @@ namespace Kaiser
 		void PushLayer(Layer* layer);
 		void PushOverlay(Layer* layer);
 
-		inline Window& GetWindow() { return *window; }
+		inline Window& GetWindow() { return *mWindow; }
 
-		inline static Application& Get() { return *instance; }
+		inline static Application& Get() { return *mInstance; }
 		
 	private:
 		bool OnWindowClose(WindowCloseEvent& e);
 		
 		
-		std::unique_ptr<Window> window;
-		ImGuiLayer* guiLayer;
-		bool running = true;
+		std::unique_ptr<Window> mWindow;
+		ImGuiLayer* mGuiLayer;
+		bool mRunning = true;
 		
-		LayerStack layers;
+		LayerStack mLayers;
 
-		unsigned int vertexArray, vertexBuffer, indexBuffer;
-		std::unique_ptr<Shader> shader;
-		
+
 	private:
-		static Application* instance;
+		static Application* mInstance;
 	};
 
 

@@ -16,6 +16,8 @@ namespace Kaiser
 		virtual void OnImGuiRender() override;
 
 		
+		virtual void OnUpdate() override;
+		
 		
 		void Begin();
 		void End();

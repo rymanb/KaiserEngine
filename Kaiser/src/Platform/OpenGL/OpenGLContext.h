@@ -17,7 +17,7 @@ namespace Kaiser
 
 
 	private:
-		GLFWwindow* m_WindowHandle;
+		GLFWwindow* mWindowHandle;
 		
 	};
 }

@@ -57,10 +57,25 @@
     <ClInclude Include="src\Kaiser\Application.h">
       <Filter>src\Kaiser</Filter>
     </ClInclude>
+    <ClInclude Include="src\Kaiser\Component.h">
+      <Filter>src\Kaiser</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Kaiser\ComponentFactory.h">
+      <Filter>src\Kaiser</Filter>
+    </ClInclude>
     <ClInclude Include="src\Kaiser\Core.h">
       <Filter>src\Kaiser</Filter>
     </ClInclude>
     <ClInclude Include="src\Kaiser\CrashDump.h">
+      <Filter>src\Kaiser</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Kaiser\ECS.h">
+      <Filter>src\Kaiser</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Kaiser\Engine.h">
+      <Filter>src\Kaiser</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Kaiser\Entity.h">
       <Filter>src\Kaiser</Filter>
     </ClInclude>
     <ClInclude Include="src\Kaiser\EntryPoint.h">
@@ -102,19 +117,58 @@
     <ClInclude Include="src\Kaiser\Memory\MemoryManager.h">
       <Filter>src\Kaiser\Memory</Filter>
     </ClInclude>
+    <ClInclude Include="src\Kaiser\Module.h">
+      <Filter>src\Kaiser</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Kaiser\Renderer\Buffer.h">
+      <Filter>src\Kaiser\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Kaiser\Renderer\Camera.h">
+      <Filter>src\Kaiser\Renderer</Filter>
+    </ClInclude>
     <ClInclude Include="src\Kaiser\Renderer\GraphicsContext.h">
+      <Filter>src\Kaiser\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Kaiser\Renderer\RenderAPI.h">
+      <Filter>src\Kaiser\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Kaiser\Renderer\RenderCommand.h">
+      <Filter>src\Kaiser\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Kaiser\Renderer\Renderer.h">
       <Filter>src\Kaiser\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\Kaiser\Renderer\Shader.h">
       <Filter>src\Kaiser\Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="src\Kaiser\Renderer\VertexArray.h">
+      <Filter>src\Kaiser\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Kaiser\Scene.h">
+      <Filter>src\Kaiser</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Kaiser\SceneManager.h">
+      <Filter>src\Kaiser</Filter>
+    </ClInclude>
     <ClInclude Include="src\Kaiser\Trace.h">
+      <Filter>src\Kaiser</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Kaiser\UUID.h">
       <Filter>src\Kaiser</Filter>
     </ClInclude>
     <ClInclude Include="src\Kaiser\Window.h">
       <Filter>src\Kaiser</Filter>
     </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLBuffer.h">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClInclude>
     <ClInclude Include="src\Platform\OpenGL\OpenGLContext.h">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLRenderAPI.h">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Platform\OpenGL\OpenGLVertexArray.h">
       <Filter>src\Platform\OpenGL</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\Windows\WinInput.h">
@@ -1379,6 +1433,18 @@
     <ClCompile Include="src\Kaiser\Application.cpp">
       <Filter>src\Kaiser</Filter>
     </ClCompile>
+    <ClCompile Include="src\Kaiser\ComponentFactory.cpp">
+      <Filter>src\Kaiser</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Kaiser\ECS.cpp">
+      <Filter>src\Kaiser</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Kaiser\Engine.cpp">
+      <Filter>src\Kaiser</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Kaiser\Entity.cpp">
+      <Filter>src\Kaiser</Filter>
+    </ClCompile>
     <ClCompile Include="src\Kaiser\ImGui\ImGuiBuild.cpp">
       <Filter>src\Kaiser\ImGui</Filter>
     </ClCompile>
@@ -1394,13 +1460,49 @@
     <ClCompile Include="src\Kaiser\Memory\MemoryManager.cpp">
       <Filter>src\Kaiser\Memory</Filter>
     </ClCompile>
+    <ClCompile Include="src\Kaiser\Renderer\Buffer.cpp">
+      <Filter>src\Kaiser\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Kaiser\Renderer\Camera.cpp">
+      <Filter>src\Kaiser\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Kaiser\Renderer\RenderAPI.cpp">
+      <Filter>src\Kaiser\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Kaiser\Renderer\RenderCommand.cpp">
+      <Filter>src\Kaiser\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Kaiser\Renderer\Renderer.cpp">
+      <Filter>src\Kaiser\Renderer</Filter>
+    </ClCompile>
     <ClCompile Include="src\Kaiser\Renderer\Shader.cpp">
       <Filter>src\Kaiser\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Kaiser\Renderer\VertexArray.cpp">
+      <Filter>src\Kaiser\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Kaiser\Scene.cpp">
+      <Filter>src\Kaiser</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Kaiser\SceneManager.cpp">
+      <Filter>src\Kaiser</Filter>
     </ClCompile>
     <ClCompile Include="src\Kaiser\Trace.cpp">
       <Filter>src\Kaiser</Filter>
     </ClCompile>
+    <ClCompile Include="src\Kaiser\UUID.cpp">
+      <Filter>src\Kaiser</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLBuffer.cpp">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClCompile>
     <ClCompile Include="src\Platform\OpenGL\OpenGLContext.cpp">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLRenderAPI.cpp">
+      <Filter>src\Platform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Platform\OpenGL\OpenGLVertexArray.cpp">
       <Filter>src\Platform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\Windows\WinCrashDump.cpp">

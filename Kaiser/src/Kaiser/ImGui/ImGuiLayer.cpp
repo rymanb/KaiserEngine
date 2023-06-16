@@ -13,7 +13,9 @@
 #include <GLFW/glfw3.h>
 #include <glad/glad.h>
 
+#include "Kaiser/Engine.h"
 
+#include "Kaiser/SceneManager.h"
 
 Kaiser::ImGuiLayer::ImGuiLayer() : Layer("ImGuiLayer")
 {
@@ -80,6 +82,10 @@ void Kaiser::ImGuiLayer::OnImGuiRender()
 {
 	static bool show = true;
 	ImGui::ShowDemoWindow(&show);
+}
+
+void Kaiser::ImGuiLayer::OnUpdate()
+{
 }
 
 

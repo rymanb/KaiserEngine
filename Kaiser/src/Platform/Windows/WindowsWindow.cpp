@@ -38,9 +38,9 @@ namespace Kaiser {
 
 	void WindowsWindow::Init(const WindowProps& props)
 	{
-		m_Data.Title = props.Title;
-		m_Data.Width = props.Width;
-		m_Data.Height = props.Height;
+		mData.Title = props.Title;
+		mData.Width = props.Width;
+		mData.Height = props.Height;
 
 
 		KS_CORE_INFO("Creating window {0} ({1}, {2})", props.Title, props.Width, props.Height);
@@ -56,18 +56,18 @@ namespace Kaiser {
 			s_GLFWInitialized = true;
 		}
 
-		m_Window = glfwCreateWindow((int)props.Width, (int)props.Height, m_Data.Title.c_str(), nullptr, nullptr);
+		mWindow = glfwCreateWindow((int)props.Width, (int)props.Height, mData.Title.c_str(), nullptr, nullptr);
 
-		m_Context = new OpenGLContext(m_Window);
-		m_Context->Init();
+		mContext = new OpenGLContext(mWindow);
+		mContext->Init();
 		
 
 		KS_CORE_ASSERT(status, "Failed to initialize Glad!");
-		glfwSetWindowUserPointer(m_Window, &m_Data);
+		glfwSetWindowUserPointer(mWindow, &mData);
 		SetVSync(true);
 
 		// Set GLFW callbacks
-		glfwSetWindowSizeCallback(m_Window, [](GLFWwindow* win, int width, int height)
+		glfwSetWindowSizeCallback(mWindow, [](GLFWwindow* win, int width, int height)
 			{
 				auto& data = *(WindowData*)glfwGetWindowUserPointer(win);
 				data.Width = width;
@@ -77,13 +77,13 @@ namespace Kaiser {
 				data.EventCallback(event);
 			});
 
-		glfwSetWindowCloseCallback(m_Window, [](GLFWwindow* win)
+		glfwSetWindowCloseCallback(mWindow, [](GLFWwindow* win)
 			{
 				auto& data = *(WindowData*)glfwGetWindowUserPointer(win);
 				WindowCloseEvent event;
 				data.EventCallback(event);
 			});
-		glfwSetKeyCallback(m_Window, [](GLFWwindow* win, int key, int scancode, int action, int mods)
+		glfwSetKeyCallback(mWindow, [](GLFWwindow* win, int key, int scancode, int action, int mods)
 			{
 				auto& data = *(WindowData*)glfwGetWindowUserPointer(win);
 				switch (action)
@@ -108,7 +108,7 @@ namespace Kaiser {
 					}
 				}
 			});
-		glfwSetMouseButtonCallback(m_Window, [](GLFWwindow* win, int button, int action, int mods)
+		glfwSetMouseButtonCallback(mWindow, [](GLFWwindow* win, int button, int action, int mods)
 			{
 				auto& data = *(WindowData*)glfwGetWindowUserPointer(win);
 				switch (action)
@@ -129,14 +129,14 @@ namespace Kaiser {
 				}
 			});
 
-		glfwSetScrollCallback(m_Window, [](GLFWwindow* win, double x, double y)
+		glfwSetScrollCallback(mWindow, [](GLFWwindow* win, double x, double y)
 			{
 				auto& data = *(WindowData*)glfwGetWindowUserPointer(win);
 
 				MouseScrolledEvent event((float)x, (float)y);
 				data.EventCallback(event);
 			});
-		glfwSetCursorPosCallback(m_Window, [](GLFWwindow* win, double x, double y)
+		glfwSetCursorPosCallback(mWindow, [](GLFWwindow* win, double x, double y)
 			{
 				auto& data = *(WindowData*)glfwGetWindowUserPointer(win);
 
@@ -148,14 +148,14 @@ namespace Kaiser {
 
 	void WindowsWindow::Shutdown()
 	{
-		glfwDestroyWindow(m_Window);
-		delete m_Context;
+		glfwDestroyWindow(mWindow);
+		delete mContext;
 	}
 
 	void WindowsWindow::OnUpdate()
 	{
 		glfwPollEvents();
-		m_Context->SwapBuffers();
+		mContext->SwapBuffers();
 
 	}
 
@@ -166,12 +166,12 @@ namespace Kaiser {
 		else
 			glfwSwapInterval(0);
 
-		m_Data.VSync = enabled;
+		mData.VSync = enabled;
 	}
 
 	bool WindowsWindow::IsVSync() const
 	{
-		return m_Data.VSync;
+		return mData.VSync;
 	}
 
 }

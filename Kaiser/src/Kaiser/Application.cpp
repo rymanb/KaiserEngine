@@ -3,89 +3,35 @@
 
 #include "Kaiser/Trace.h"
 
-#include <glad/glad.h>
 #include "Input.h"
+
+#include "Kaiser/Renderer/Renderer.h"
+
+#include "Scene.h"
+
 
 
 #define BIND_EVENT(x) std::bind(&Application::x, this, std::placeholders::_1)
 
 namespace Kaiser
 {
-	Application* Application::instance = nullptr;
+	Application* Application::mInstance = nullptr;
 }
+
+
 
 Kaiser::Application::Application()
 {
-	KS_CORE_ASSERT(!instance, "Application already exists!");
-	instance = this;
+	KS_CORE_ASSERT(!mInstance, "Application already exists!");
+	mInstance = this;
 	
-	window = std::unique_ptr<Window>(Window::Create());
-	window->SetEventCallback(BIND_EVENT(OnEvent));
+	mWindow = std::unique_ptr<Window>(Window::Create());
+	mWindow->SetEventCallback(BIND_EVENT(OnEvent));
 
-	guiLayer = new ImGuiLayer();
-	PushOverlay(guiLayer);
-
-	// Vertex Array Object
-	glGenVertexArrays(1, &vertexArray);
-	glBindVertexArray(vertexArray);
-	
-	// Vertex Buffer Object
-	glGenBuffers(1, &vertexBuffer);
-	glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
-	
-	// NDC coords -1 to 1
-	float vertices[3 * 3] = {
-		-0.5f, -0.5f, 0.0f,
-		 0.5f, -0.5f, 0.0f,
-		 0.0f,  0.5f, 0.0f
-	};
-
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
-	
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), nullptr);
-
-	// Index Buffer Object
-	glGenBuffers(1, &indexBuffer);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer);
-	
-	unsigned int indices[3] = { 0, 1, 2 };
-	
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-
-	std::string vertSrc = R"(
-		#version 330 core
-
-		layout(location = 0) in vec3 a_Position;
-		out vec3 position;
-
-		void main()
-		{
-			gl_Position = vec4(a_Position,1.0);
-			position = vec3(a_Position * 0.5 + 0.5);
-		}
+	mGuiLayer = new ImGuiLayer();
+	PushOverlay(mGuiLayer);
 
 
-
-	)";
-
-	std::string fragSrc = R"(
-		#version 330 core
-
-		out vec4 color;
-		in vec3 position;
-		
-
-		void main()
-		{
-			color = vec4(position, 1.0);
-		}
-
-
-
-	)";
-
-	shader.reset(new Shader(vertSrc, fragSrc));
 }
 
 Kaiser::Application::~Application()
@@ -94,29 +40,34 @@ Kaiser::Application::~Application()
 
 void Kaiser::Application::Run()
 {
+	Engine::Instance().Init();
 
-
-	while (running)
-	{
-		glClearColor(0.1f, 0.1f, 0.1f, 0.1f);
-		glClear(GL_COLOR_BUFFER_BIT);
-
-		shader->Bind();
-		glBindVertexArray(vertexArray);
-		glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, nullptr);
-		shader->Unbind();
-		
-		for (Layer* layer : layers)
+	
+	while (mRunning)
+	{		
+		for (Layer* layer : mLayers)
+		{
 			layer->OnUpdate();
+			auto& scene = layer->GetActiveScene();
+			if (scene != nullptr)
+			{
+				scene->Update();
+			}
+		}
 
-		guiLayer->Begin();
-		for (Layer* layer : layers)
+		mGuiLayer->Begin();
+		for (Layer* layer : mLayers)
 			layer->OnImGuiRender();
-		guiLayer->End();
+		mGuiLayer->End();
 
 		
-		window->OnUpdate();
+		mWindow->OnUpdate();
+		Engine::Instance().Update(0);
+
+
 	}
+	
+	Engine::Instance().Shutdown();
 }
 
 void Kaiser::Application::OnEvent(Event& e)
@@ -126,7 +77,7 @@ void Kaiser::Application::OnEvent(Event& e)
 
 	//KS_CORE_TRACE("{0}", e);
 	
-	for (auto it = layers.end(); it != layers.begin();)
+	for (auto it = mLayers.end(); it != mLayers.begin();)
 	{
 		(*--it)->OnEvent(e);
 		if (e.Handled)
@@ -137,19 +88,19 @@ void Kaiser::Application::OnEvent(Event& e)
 
 void Kaiser::Application::PushLayer(Layer* layer)
 {
-	layers.PushLayer(layer);
+	mLayers.PushLayer(layer);
 	layer->OnAttach();
 }
 
 void Kaiser::Application::PushOverlay(Layer* layer)
 {
-	layers.PushOverlay(layer);
+	mLayers.PushOverlay(layer);
 	layer->OnAttach();
 }
 
 bool Kaiser::Application::OnWindowClose(WindowCloseEvent& e)
 {
-	running = false;
+	mRunning = false;
 
 	return true;
 

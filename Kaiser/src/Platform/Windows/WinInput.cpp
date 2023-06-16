@@ -5,7 +5,7 @@
 
 
 
-Kaiser::Input* Kaiser::Input::s_Instance = new WinInput();
+Kaiser::Input* Kaiser::Input::mInstance = new WinInput();
 
 bool Kaiser::WinInput::IsKeyPressedImpl(int keycode)
 {

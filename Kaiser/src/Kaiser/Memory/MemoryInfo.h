@@ -49,7 +49,7 @@ namespace Kaiser
 		"vendor"
 	};
 
-	struct Buffer
+	struct MemBuffer
 	{
 		char file[1024];
 		int line;

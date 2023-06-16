@@ -18,12 +18,12 @@ namespace Kaiser
 	public:
 		static void Init();
 		
-		inline static Logger& GetCoreLogger() { return s_CoreLogger; }
-		inline static Logger& GetClientLogger() { return s_ClientLogger; }
+		inline static Logger& GetCoreLogger() { return sCoreLogger; }
+		inline static Logger& GetClientLogger() { return sClientLogger; }
 
 	private:
-		static Logger s_CoreLogger; // static member variable
-		static Logger s_ClientLogger;
+		static Logger sCoreLogger; // static member variable
+		static Logger sClientLogger;
 	};
 		
 	

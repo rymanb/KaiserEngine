@@ -16,6 +16,7 @@ IncludeDir["GLFW"] = "Kaiser/vendor/glfw/include"
 IncludeDir["Glad"] = "Kaiser/vendor/glad/include"
 IncludeDir["ImGui"] = "Kaiser/vendor/imgui"
 IncludeDir["glm"] = "Kaiser/vendor/glm"
+IncludeDir["entt"] = "Kaiser/vendor/entt"
 
 include "Kaiser/vendor/glfw"
 include "Kaiser/vendor/glad"
@@ -43,6 +44,7 @@ project "Kaiser"
 		"%{prj.name}/src/**.cpp",
 		"%{prj.name}/vendor/glm/glm/**.hpp",
 		"%{prj.name}/vendor/glm/glm/**.inl"
+
 	}
 
 	defines
@@ -57,7 +59,8 @@ project "Kaiser"
 		"%{IncludeDir.GLFW}",
 		"%{IncludeDir.Glad}",
 		"%{IncludeDir.ImGui}",
-		"%{IncludeDir.glm}"
+		"%{IncludeDir.glm}",
+		"%{IncludeDir.entt}"
 		
 	}
 	
@@ -119,7 +122,8 @@ project "Sandbox"
 		"Kaiser/vendor/spdlog/include",
 		"Kaiser/src",
 		"%{IncludeDir.glm}",
-		"%{IncludeDir.ImGui}"
+		"%{IncludeDir.ImGui}",
+		"%{IncludeDir.entt}"
 	}
 
 	links

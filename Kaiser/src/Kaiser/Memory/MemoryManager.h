@@ -35,7 +35,7 @@ namespace Kaiser
 
 
 
-			Buffer* savedLocations = (Buffer*)_malloca(size * sizeof(Buffer));
+			MemBuffer* savedLocations = (MemBuffer*)_malloca(size * sizeof(MemBuffer));
 			int savedLocationsSize = 0;
 
 

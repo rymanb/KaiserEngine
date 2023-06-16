@@ -7,14 +7,14 @@
 #include <GLFW/glfw3.h>
 #include <glad/glad.h>
 
-Kaiser::OpenGLContext::OpenGLContext(GLFWwindow* windowHandle) : m_WindowHandle(windowHandle)
+Kaiser::OpenGLContext::OpenGLContext(GLFWwindow* windowHandle) : mWindowHandle(windowHandle)
 {
 	KS_CORE_ASSERT(windowHandle, "Window handle is null!")
 }
 
 void Kaiser::OpenGLContext::Init()
 {
-	glfwMakeContextCurrent(m_WindowHandle);
+	glfwMakeContextCurrent(mWindowHandle);
 	int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 	KS_CORE_ASSERT(status, "Failed to initialize Glad!");
 
@@ -30,5 +30,5 @@ void Kaiser::OpenGLContext::Init()
 
 void Kaiser::OpenGLContext::SwapBuffers()
 {
-	glfwSwapBuffers(m_WindowHandle);
+	glfwSwapBuffers(mWindowHandle);
 }

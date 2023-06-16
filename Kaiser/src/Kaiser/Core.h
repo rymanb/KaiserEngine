@@ -19,3 +19,9 @@
 
 
 #define BIT(x) (1 << x)
+
+
+	#include <memory>
+	
+	template<typename T>
+	using Ref = std::shared_ptr<T>;

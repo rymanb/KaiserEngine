@@ -4,6 +4,8 @@
 
 namespace Kaiser {
 
+	class Scene;
+	
 	class Layer
 	{
 	public:
@@ -16,9 +18,13 @@ namespace Kaiser {
 		virtual void OnEvent(Event& event) {}
 		virtual void OnImGuiRender() {}
 
-		inline const std::string& GetName() const { return m_DebugName; }
+		inline const std::string& GetName() const { return mDebugName; }
+		const Ref<Scene>& GetActiveScene() const { return mActiveScene; }
 	protected:
-		std::string m_DebugName;
+		std::string mDebugName;
+		
+		Ref<Scene> mActiveScene;
+		
 	};
 
 }
