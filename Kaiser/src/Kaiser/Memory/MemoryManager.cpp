@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "MemoryManager.h"
 
-#include "Kaiser/Trace.h"
+#include "Kaiser/Core/Trace.h"
 
 #include <Windows.h>
 #include <DbgHelp.h>

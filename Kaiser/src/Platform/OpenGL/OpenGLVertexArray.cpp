@@ -2,6 +2,7 @@
 #include "OpenGLVertexArray.h"
 
 #include <glad/glad.h>
+#include "Kaiser/Renderer/Renderer.h"
 
 namespace Kaiser
 {
@@ -29,26 +30,34 @@ namespace Kaiser
 
 Kaiser::OpenGLVertexArray::OpenGLVertexArray()
 {
-	glGenVertexArrays(1, &mId);
-	glBindVertexArray(mId);
+
+		glGenVertexArrays(1, &mId);
+		glBindVertexArray(mId);
+		
 }
 
 inline Kaiser::OpenGLVertexArray::~OpenGLVertexArray() 
 {
-	glDeleteVertexArrays(1, &mId);
+
+		glDeleteVertexArrays(1, &mId);
+		
 }
 
 void Kaiser::OpenGLVertexArray::Bind() const
 {
-	glBindVertexArray(mId);
+	Renderer::Submit([&] {
+		glBindVertexArray(mId);
+		});
 }
 
 void Kaiser::OpenGLVertexArray::Unbind() const
 {
-	glBindVertexArray(0);
+	Renderer::Submit([&] {
+		glBindVertexArray(0);
+		});
 }
 
-void Kaiser::OpenGLVertexArray::SetVertexBuffer(const std::shared_ptr<VertexBuffer>& vert)
+void Kaiser::OpenGLVertexArray::SetVertexBuffer(const Ref<VertexBuffer>& vert)
 {
 	KS_CORE_ASSERT(vert->GetLayout().GetElements().size(), "Vertex Buffer has no layout!");
 	
@@ -75,7 +84,7 @@ void Kaiser::OpenGLVertexArray::SetVertexBuffer(const std::shared_ptr<VertexBuff
 	
 }
 
-void Kaiser::OpenGLVertexArray::SetIndexBuffer(const std::shared_ptr<IndexBuffer>& index)
+void Kaiser::OpenGLVertexArray::SetIndexBuffer(const Ref<IndexBuffer>& index)
 {
 	glBindVertexArray(mId);
 	index->Bind();

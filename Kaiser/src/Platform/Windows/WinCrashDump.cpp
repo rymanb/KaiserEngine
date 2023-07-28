@@ -1,10 +1,10 @@
 
 #include "stdafx.h"
-#include "Kaiser/CrashDump.h"
+#include "Kaiser/Core/CrashDump.h"
 //#ifdef _DEBUG
 #include <DbgHelp.h>
 
-#include "Kaiser/Trace.h"
+#include "Kaiser/Core/Trace.h"
 
 
 #pragma comment ( lib, "dbghelp.lib" )

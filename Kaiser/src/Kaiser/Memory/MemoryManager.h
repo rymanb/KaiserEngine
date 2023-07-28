@@ -3,7 +3,7 @@
 #include <map>
 #include <mutex>
 #include "MemoryInfo.h"
-#include "Kaiser/Trace.h"
+#include "Kaiser/Core/Trace.h"
 
 // make Allocator::Shutdown() get called when the program exits. put it in the programs exit function
 #define KAISER_SHUTDOWN_AT_EXIT() atexit(Kaiser::Allocator::Shutdown)

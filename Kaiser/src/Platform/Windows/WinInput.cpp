@@ -1,11 +1,11 @@
 #include "stdafx.h"
 #include "WinInput.h"
 #include <GLFW/glfw3.h>
-#include "Kaiser/Application.h"
+#include "Kaiser/Core/Application.h"
 
 
 
-Kaiser::Input* Kaiser::Input::mInstance = new WinInput();
+Kaiser::Ref<Kaiser::Input> Kaiser::Input::mInstance = CreateRef<WinInput>();
 
 bool Kaiser::WinInput::IsKeyPressedImpl(int keycode)
 {
@@ -160,6 +160,10 @@ Key KeyCode::RightControl(GLFW_KEY_RIGHT_CONTROL);
 Key KeyCode::RightAlt(GLFW_KEY_RIGHT_ALT);
 Key KeyCode::RightSuper(GLFW_KEY_RIGHT_SUPER);
 Key KeyCode::Menu(GLFW_KEY_MENU);
+
+Key KeyCode::MouseLeft(GLFW_MOUSE_BUTTON_LEFT);
+Key KeyCode::MouseRight(GLFW_MOUSE_BUTTON_RIGHT);
+Key KeyCode::MouseMiddle(GLFW_MOUSE_BUTTON_MIDDLE);
 
 Key KeyCode::Last(GLFW_KEY_LAST);
 

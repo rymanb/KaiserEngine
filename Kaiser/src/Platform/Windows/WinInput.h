@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Kaiser/Core.h"
-#include "Kaiser/Events/Event.h"
-#include "Kaiser/Input.h"
+#include "Kaiser/Core/Core.h"
+#include "Kaiser/Core/Events/Event.h"
+#include "Kaiser/Core/Input.h"
 
 
 namespace Kaiser

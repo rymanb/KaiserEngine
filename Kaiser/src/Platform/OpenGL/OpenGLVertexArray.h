@@ -13,15 +13,15 @@ namespace Kaiser
 		virtual void Bind() const override;
 		virtual void Unbind() const override;
 
-		virtual void SetVertexBuffer(const std::shared_ptr<VertexBuffer>& vert) override;
-		virtual void SetIndexBuffer(const std::shared_ptr<IndexBuffer>& index) override;
+		virtual void SetVertexBuffer(const Ref<VertexBuffer>& vert) override;
+		virtual void SetIndexBuffer(const Ref<IndexBuffer>& index) override;
 
-		virtual const std::vector<std::shared_ptr<VertexBuffer>>& GetVertexBuffer() const override { return mVertexBuffers; }
-		virtual const std::shared_ptr<IndexBuffer>& GetIndexBuffer() const override { return mIndexBuffer; }
+		virtual const std::vector<Ref<VertexBuffer>>& GetVertexBuffer() const override { return mVertexBuffers; }
+		virtual const Ref<IndexBuffer>& GetIndexBuffer() const override { return mIndexBuffer; }
 
 	private:
-		std::vector<std::shared_ptr<VertexBuffer>> mVertexBuffers;
-		std::shared_ptr<IndexBuffer> mIndexBuffer;
+		std::vector<Ref<VertexBuffer>> mVertexBuffers;
+		Ref<IndexBuffer> mIndexBuffer;
 		uint32_t mId;
 		
 	};

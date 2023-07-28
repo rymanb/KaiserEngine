@@ -7,9 +7,18 @@ namespace Kaiser
 	class RenderCommand
 	{
 	public:
-		inline void static DrawIndexed(const std::shared_ptr<VertexArray>& vertexArray)
+		inline static void Init()
+		{
+			sRenderAPI->Init();
+		}
+		inline void static DrawIndexed(const Ref<VertexArray>& vertexArray)
 		{
 			sRenderAPI->DrawIndexed(vertexArray);
+		}
+
+		inline void static DrawIndexed(uint32_t count, bool depthTest)
+		{
+			sRenderAPI->DrawIndexed(count,  depthTest);
 		}
 
 		inline void static SetClearColor(const glm::vec4& color)
@@ -22,7 +31,8 @@ namespace Kaiser
 			sRenderAPI->Clear();
 		}
 		
+		
 	private:
-		static RenderAPI* sRenderAPI;
+		static Ref<RenderAPI> sRenderAPI;
 	};
 }

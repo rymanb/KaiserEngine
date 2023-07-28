@@ -5,5 +5,5 @@
 
 namespace Kaiser
 {
-	RenderAPI* RenderCommand::sRenderAPI = new OpenGLRenderAPI;
+	Ref<RenderAPI> RenderCommand::sRenderAPI = CreateRef<OpenGLRenderAPI>();
 }

@@ -1,7 +1,7 @@
 #pragma once
 #pragma once
 
-#include "Kaiser/Window.h"
+#include "Kaiser/Core/Window.h"
 
 #include <GLFW/glfw3.h>
 

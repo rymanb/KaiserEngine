@@ -1,144 +1,73 @@
 #include "stdafx.h"
 #include "Shader.h"
 
-#include <glad/glad.h>
 
-#include "Kaiser/Trace.h"
+#include "Kaiser/Core/Trace.h"
+#include "Platform/OpenGL/OpenGLShader.h"
+#include "Renderer.h"
 
-Kaiser::Shader::Shader(const std::string& vertexSource, const std::string& fragmentSource)
+namespace Kaiser
 {
-	// Read our shaders into the appropriate buffers
-	//std::string& vertexSource = vertexSrc;// Get source code for vertex shader.
-	//std::string& fragmentSource = fragmentSrc;// Get source code for fragment shader.
 
-		// Create an empty vertex shader handle
-	GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
-
-	// Send the vertex shader source code to GL
-	// Note that std::string's .c_str is NULL character terminated.
-	const GLchar* source = vertexSource.c_str();
-	glShaderSource(vertexShader, 1, &source, 0);
-
-	// Compile the vertex shader
-	glCompileShader(vertexShader);
-
-	GLint isCompiled = 0;
-	glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &isCompiled);
-	if (isCompiled == GL_FALSE)
+	Ref<Shader> Shader::Create(const std::string& filePath)
 	{
-		GLint maxLength = 0;
-		glGetShaderiv(vertexShader, GL_INFO_LOG_LENGTH, &maxLength);
+		switch (Renderer::API())
+		{
+		case RenderAPI::API::None:    KS_CORE_ASSERT(false, "RendererAPI::None is currently not supported!"); return nullptr;
+		case RenderAPI::API::OpenGL:  return CreateRef<OpenGLShader>(filePath);
+		}
 
-		// The maxLength includes the NULL character
-
-		std::vector<GLchar> infoLog(maxLength);
-		glGetShaderInfoLog(vertexShader, maxLength, &maxLength, &infoLog[0]);
-
-		// We don't need the shader anymore.
-		glDeleteShader(vertexShader);
-
-		// Use the infoLog as you see fit.
-		KS_CORE_ERROR("{0}", infoLog.data());
-		KS_CORE_ASSERT(false, "Vertex Shader Compilation Failure!");
-
-		// In this simple program, we'll just leave
-		return;
+		KS_CORE_ASSERT(false, "Unknown RendererAPI!");
+		return nullptr;
 	}
 
-	// Create an empty fragment shader handle
-	GLuint fragmentShader = glCreateShader(GL_FRAGMENT_SHADER);
-
-	// Send the fragment shader source code to GL
-	// Note that std::string's .c_str is NULL character terminated.
-	source = (const GLchar*)fragmentSource.c_str();
-	glShaderSource(fragmentShader, 1, &source, 0);
-
-	// Compile the fragment shader
-	glCompileShader(fragmentShader);
-
-	glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &isCompiled);
-	if (isCompiled == GL_FALSE)
+	Ref<Shader> Shader::Create(const std::string& name, const std::string& vertexSrc, const std::string& fragmentSrc)
 	{
-		GLint maxLength = 0;
-		glGetShaderiv(fragmentShader, GL_INFO_LOG_LENGTH, &maxLength);
+		switch (Renderer::API())
+		{
+		case RenderAPI::API::None:    KS_CORE_ASSERT(false, "RendererAPI::None is currently not supported!"); return nullptr;
+		case RenderAPI::API::OpenGL:  return CreateRef<OpenGLShader>(name, vertexSrc, fragmentSrc);
+		}
 
-		// The maxLength includes the NULL character
-		std::vector<GLchar> infoLog(maxLength);
-		glGetShaderInfoLog(fragmentShader, maxLength, &maxLength, &infoLog[0]);
-
-		// We don't need the shader anymore.
-		glDeleteShader(fragmentShader);
-		// Either of them. Don't leak shaders.
-		glDeleteShader(vertexShader);
-
-		// Use the infoLog as you see fit.
-		KS_CORE_ERROR("{0}", infoLog.data());
-		KS_CORE_ASSERT(false, "Fragment Shader Compilation Failure!");
-		
-
-		// In this simple program, we'll just leave
-		return;
+		KS_CORE_ASSERT(false, "Unknown RendererAPI!");
+		return nullptr;
 	}
 
-	// Vertex and fragment shaders are successfully compiled.
-	// Now time to link them together into a program.
-	// Get a program object.
-	mID = glCreateProgram();
-
-	// Attach our shaders to our program
-	glAttachShader(mID, vertexShader);
-	glAttachShader(mID, fragmentShader);
-
-	// Link our program
-	glLinkProgram(mID);
-
-	// Note the different functions here: glGetProgram* instead of glGetShader*.
-	GLint isLinked = 0;
-	glGetProgramiv(mID, GL_LINK_STATUS, (int*)&isLinked);
-	if (isLinked == GL_FALSE)
+	void ShaderManager::Add(const Ref<Shader>& shader)
 	{
-		GLint maxLength = 0;
-		glGetProgramiv(mID, GL_INFO_LOG_LENGTH, &maxLength);
-
-		// The maxLength includes the NULL character
-		std::vector<GLchar> infoLog(maxLength);
-		glGetProgramInfoLog(mID, maxLength, &maxLength, &infoLog[0]);
-
-		// We don't need the program anymore.
-		glDeleteProgram(mID);
-		// Don't leak shaders either.
-		glDeleteShader(vertexShader);
-		glDeleteShader(fragmentShader);
-
-		// Use the infoLog as you see fit.
-		KS_CORE_ERROR("{0}", infoLog.data());
-		KS_CORE_ASSERT(false, "Shader Link Failure!");
-
-		// In this simple program, we'll just leave
-		return;
+		auto& name = shader->Name();
+		Add(name, shader);
 	}
 
-	// Always detach shaders after a successful link.
-	glDetachShader(mID, vertexShader);
-	glDetachShader(mID, fragmentShader);
-}
+	void ShaderManager::Add(const std::string& name, const Ref<Shader>& shader)
+	{
+		KS_CORE_ASSERT(!Exists(name), "Shader already exists!");
+		mShaders[name] = shader;
+	}
 
-Kaiser::Shader::~Shader()
-{
-	glDeleteProgram(mID);
-}
+	Ref<Shader> ShaderManager::Get(const std::string& name)
+	{
+		KS_CORE_ASSERT(Exists(name), "Shader not found!");
+		return mShaders[name];
+	}
 
-void Kaiser::Shader::Bind() const
-{
-	glUseProgram(mID);
-}
+	bool ShaderManager::Exists(const std::string& name) const
+	{
+		return mShaders.find(name) != mShaders.end();
+	}
 
-void Kaiser::Shader::Unbind() const
-{
-	glUseProgram(0);
-}
+	Ref<Shader> ShaderManager::Load(const std::string& filepath)
+	{
+		auto shader = Shader::Create(filepath);
+		Add(shader);
+		return shader;
+	}
 
-void Kaiser::Shader::UploadUniformMat4(const std::string& name, const glm::mat4& matrix)
-{
-	glUniformMatrix4fv(glGetUniformLocation(mID, name.c_str()), 1, GL_FALSE, &matrix[0][0]);
+	Ref<Shader> ShaderManager::Load(const std::string& name, const std::string& filepath)
+	{
+		auto shader = Shader::Create(filepath);
+		Add(name, shader);
+		return shader;
+	}
+
 }

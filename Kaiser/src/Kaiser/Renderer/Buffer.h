@@ -1,7 +1,7 @@
 #pragma once
 
 #include "stdafx.h"
-#include "Kaiser/Trace.h"
+#include "Kaiser/Core/Trace.h"
 
 namespace Kaiser
 {
@@ -127,19 +127,14 @@ namespace Kaiser
 	};
 
 	
-	class Buffer
-	{
-	public:
-		virtual ~Buffer() {}
 
-		virtual void Bind() const = 0;
-		virtual void Unbind() const = 0;
-	};
 
-	class VertexBuffer : public Buffer
+	class VertexBuffer 
 	{
 	public:
 		virtual ~VertexBuffer() {}
+
+		virtual void SetData(const void* data, uint32_t size) = 0;
 
 		virtual void Bind() const = 0;
 		virtual void Unbind() const = 0;
@@ -147,13 +142,16 @@ namespace Kaiser
 		virtual void SetLayout(const BufferLayout& layout) = 0;
 		virtual const BufferLayout& GetLayout() const = 0;
 
-		static VertexBuffer* Create(float* vertices, size_t size);
+		static VertexBuffer* Create(void* vertices, size_t size);
+		static VertexBuffer* Create();
 	};
 
-	class IndexBuffer : public Buffer
+	class IndexBuffer 
 	{
 	public:
 		virtual ~IndexBuffer() {}
+
+		virtual void SetData(void* indices, uint32_t count) = 0;
 
 		virtual void Bind() const = 0;
 		virtual void Unbind() const = 0;
@@ -161,6 +159,7 @@ namespace Kaiser
 		virtual uint32_t GetCount() const = 0;
 
 
-		static IndexBuffer* Create(uint32_t* indices, size_t count);
+		static Ref<IndexBuffer> Create(void* indices, size_t count);
+		static Ref<IndexBuffer> Create(unsigned int size = 0);
 	};
 }

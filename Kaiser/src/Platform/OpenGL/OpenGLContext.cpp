@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "OpenGLContext.h"
 
-#include "Kaiser/Trace.h"
+#include "Kaiser/Core/Trace.h"
 
 
 #include <GLFW/glfw3.h>

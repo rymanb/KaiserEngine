@@ -9,12 +9,12 @@ namespace Kaiser
 {
 
 
-	Kaiser::VertexArray* VertexArray::Create()
+	Ref<VertexArray> VertexArray::Create()
 	{
 		switch (Renderer::API())
 		{
 		case RenderAPI::API::None:    KS_CORE_ASSERT(false, "RendererAPI::None is currently not supported!"); return nullptr;
-		case RenderAPI::API::OpenGL:  return new OpenGLVertexArray();
+		case RenderAPI::API::OpenGL:  return CreateRef<OpenGLVertexArray>();
 		}
 
 		KS_CORE_ASSERT(false, "Unknown API!");

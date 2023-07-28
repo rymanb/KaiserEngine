@@ -1,10 +1,10 @@
 #include "stdafx.h"
 #include "WindowsWindow.h"
-#include "Kaiser/Trace.h"
+#include "Kaiser/Core/Trace.h"
 
-#include "Kaiser/Events/AppEvent.h"
-#include "Kaiser/Events/KeyEvent.h"
-#include "Kaiser/Events/MouseEvent.h"
+#include "Kaiser/Core/Events/AppEvent.h"
+#include "Kaiser/Core/Events/KeyEvent.h"
+#include "Kaiser/Core/Events/MouseEvent.h"
 
 #include "Platform/OpenGL/OpenGLContext.h"
 

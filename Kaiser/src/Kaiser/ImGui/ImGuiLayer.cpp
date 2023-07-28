@@ -7,15 +7,15 @@
 #include <backends/imgui_impl_glfw.h>
 #include <backends/imgui_impl_opengl3.h>
 
-#include "Kaiser/Application.h"
+#include "Kaiser/Core/Application.h"
 
 // TEMPORARY
 #include <GLFW/glfw3.h>
 #include <glad/glad.h>
 
-#include "Kaiser/Engine.h"
+#include "Kaiser/Core/Engine.h"
 
-#include "Kaiser/SceneManager.h"
+#include "Kaiser/Scene/SceneManager.h"
 
 Kaiser::ImGuiLayer::ImGuiLayer() : Layer("ImGuiLayer")
 {
@@ -80,8 +80,7 @@ void Kaiser::ImGuiLayer::OnDetach()
 
 void Kaiser::ImGuiLayer::OnImGuiRender()
 {
-	static bool show = true;
-	ImGui::ShowDemoWindow(&show);
+
 }
 
 void Kaiser::ImGuiLayer::OnUpdate()

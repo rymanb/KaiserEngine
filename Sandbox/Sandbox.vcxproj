@@ -79,7 +79,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>KS_PLATFORM_WINDOWS;KS_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\Kaiser\vendor\spdlog\include;..\Kaiser\src;..\Kaiser\vendor\glm;..\Kaiser\vendor\imgui;..\Kaiser\vendor\entt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Kaiser\vendor\spdlog\include;..\Kaiser\src;..\Kaiser\vendor\glm;..\Kaiser\vendor\imgui;..\Kaiser\vendor\entt;..\Kaiser\vendor\assimp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -89,14 +89,18 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>..\Kaiser\vendor\assimp\bin\Debug\assimp-vc143-mtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>IF EXIST "..\Kaiser\vendor\assimp\bin\Debug\assimp-vc143-mtd.dll"\ (xcopy /Q /E /Y /I "..\Kaiser\vendor\assimp\bin\Debug\assimp-vc143-mtd.dll" "..\bin\Debug-windows-x86_64\Sandbox" &gt; nul) ELSE (xcopy /Q /Y /I "..\Kaiser\vendor\assimp\bin\Debug\assimp-vc143-mtd.dll" "..\bin\Debug-windows-x86_64\Sandbox" &gt; nul)</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>KS_PLATFORM_WINDOWS;KS_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\Kaiser\vendor\spdlog\include;..\Kaiser\src;..\Kaiser\vendor\glm;..\Kaiser\vendor\imgui;..\Kaiser\vendor\entt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Kaiser\vendor\spdlog\include;..\Kaiser\src;..\Kaiser\vendor\glm;..\Kaiser\vendor\imgui;..\Kaiser\vendor\entt;..\Kaiser\vendor\assimp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -110,14 +114,18 @@
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>..\Kaiser\vendor\assimp\bin\Debug\assimp-vc143-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>IF EXIST "..\Kaiser\vendor\assimp\bin\Debug\assimp-vc143-mtd.dll"\ (xcopy /Q /E /Y /I "..\Kaiser\vendor\assimp\bin\Debug\assimp-vc143-mtd.dll" "..\bin\Release-windows-x86_64\Sandbox" &gt; nul) ELSE (xcopy /Q /Y /I "..\Kaiser\vendor\assimp\bin\Debug\assimp-vc143-mtd.dll" "..\bin\Release-windows-x86_64\Sandbox" &gt; nul)</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Dist|x64'">
     <ClCompile>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <PreprocessorDefinitions>KS_PLATFORM_WINDOWS;KS_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>..\Kaiser\vendor\spdlog\include;..\Kaiser\src;..\Kaiser\vendor\glm;..\Kaiser\vendor\imgui;..\Kaiser\vendor\entt;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\Kaiser\vendor\spdlog\include;..\Kaiser\src;..\Kaiser\vendor\glm;..\Kaiser\vendor\imgui;..\Kaiser\vendor\entt;..\Kaiser\vendor\assimp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -131,7 +139,11 @@
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>..\Kaiser\vendor\assimp\bin\Debug\assimp-vc143-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>IF EXIST "..\Kaiser\vendor\assimp\bin\Debug\assimp-vc143-mtd.dll"\ (xcopy /Q /E /Y /I "..\Kaiser\vendor\assimp\bin\Debug\assimp-vc143-mtd.dll" "..\bin\Dist-windows-x86_64\Sandbox" &gt; nul) ELSE (xcopy /Q /Y /I "..\Kaiser\vendor\assimp\bin\Debug\assimp-vc143-mtd.dll" "..\bin\Dist-windows-x86_64\Sandbox" &gt; nul)</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp" />

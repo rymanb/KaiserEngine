@@ -1,0 +1,2 @@
+ComponentType(Test)
+ComponentType(Transform)

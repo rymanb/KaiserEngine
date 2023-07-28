@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Kaiser/CrashDump.h"
+#include "Kaiser/Core/CrashDump.h"
 
 
 #ifdef KS_PLATFORM_WINDOWS

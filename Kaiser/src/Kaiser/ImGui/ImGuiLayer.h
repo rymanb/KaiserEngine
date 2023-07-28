@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Kaiser/Layer.h"
-#include "Kaiser/Core.h"
+#include "Kaiser/Core/Layer.h"
+#include "Kaiser/Core/Core.h"
 
 namespace Kaiser
 {
